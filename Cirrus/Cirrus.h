@@ -1,8 +1,16 @@
-﻿// Cirrus.h : включаемый файл для стандартных системных включаемых файлов
-// или включаемые файлы для конкретного проекта.
-
 #pragma once
 
-#include <iostream>
+#include <QtWidgets/QMainWindow>
+#include "ui_Cirrus.h"
 
-// TODO: установите здесь ссылки на дополнительные заголовки, требующиеся для программы.
+class Cirrus : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    Cirrus(QWidget *parent = nullptr);
+    ~Cirrus();
+
+private:
+    Ui::CirrusClass ui;
+};

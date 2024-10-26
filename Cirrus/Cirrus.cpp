@@ -1,9 +1,10 @@
-﻿#include "Cirrus.h"
+#include "Cirrus.h"
 
-using namespace std;
-
-int main()
+Cirrus::Cirrus(QWidget *parent)
+    : QMainWindow(parent)
 {
-	cout << "Hello CMake." << endl;
-	return 0;
+    ui.setupUi(this);
 }
+
+Cirrus::~Cirrus()
+{}

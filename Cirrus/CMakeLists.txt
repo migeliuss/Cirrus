@@ -1,12 +1,37 @@
-﻿# CMakeList.txt: проект CMake для Cirrus; включите исходный код и определения,
-# укажите здесь логику для конкретного проекта.
-#
+cmake_minimum_required(VERSION 3.16)
+project(Cirrus LANGUAGES CXX)
 
-# Добавьте источник в исполняемый файл этого проекта.
-add_executable (Cirrus "Cirrus.cpp" "Cirrus.h")
+include(qt.cmake)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Cirrus PROPERTY CXX_STANDARD 20)
-endif()
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# TODO: Добавьте тесты и целевые объекты, если это необходимо.
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+find_package(Qt${QT_VERSION_MAJOR}
+    COMPONENTS
+        Core
+        Gui
+        Widgets
+)
+qt_standard_project_setup()
+
+set(PROJECT_SOURCES
+    main.cpp
+    Cirrus.ui
+    Cirrus.h
+    Cirrus.cpp
+)
+
+qt_add_executable(Cirrus ${PROJECT_SOURCES})
+
+set_target_properties(Cirrus
+    PROPERTIES
+        WIN32_EXECUTABLE TRUE
+)
+
+target_link_libraries(Cirrus
+    PUBLIC
+        Qt::Core
+        Qt::Gui
+        Qt::Widgets
+)

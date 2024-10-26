@@ -1,5 +1,0 @@
-C:/Users/amadu/source/repos/Cirrus/out/build/x64-debug/CMakeFiles/edit_cache.dir
-C:/Users/amadu/source/repos/Cirrus/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/amadu/source/repos/Cirrus/out/build/x64-debug/Cirrus/CMakeFiles/Cirrus.dir
-C:/Users/amadu/source/repos/Cirrus/out/build/x64-debug/Cirrus/CMakeFiles/edit_cache.dir
-C:/Users/amadu/source/repos/Cirrus/out/build/x64-debug/Cirrus/CMakeFiles/rebuild_cache.dir
