@@ -1,2 +1,2 @@
 # Cirrus
-raster graphics editor
+raster graphics editor with QT framework
