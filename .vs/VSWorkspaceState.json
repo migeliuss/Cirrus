@@ -6,8 +6,9 @@
     ]
   },
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Cirrus"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\Cirrus\\Cirrus.ui",
   "PreviewInSolutionExplorer": false
 }
