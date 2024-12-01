@@ -20,6 +20,8 @@ set(PROJECT_SOURCES
     Cirrus.ui
     Cirrus.h
     Cirrus.cpp
+    paintscene.h
+    paintscene.cpp
 )
 
 qt_add_executable(Cirrus ${PROJECT_SOURCES})

@@ -38,33 +38,20 @@
    <property name="mouseTracking">
     <bool>true</bool>
    </property>
-   <widget class="QPushButton" name="btnClose">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Создать полотно</string>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>30</y>
       <width>981</width>
-      <height>581</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="cursor" stdset="0">
      <cursorShape>CrossCursor</cursorShape>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
@@ -95,16 +82,29 @@
       <x>269</x>
       <y>147</y>
       <width>191</width>
-      <height>50</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="title">
      <string>Файл</string>
     </property>
+    <property name="toolTipsVisible">
+     <bool>true</bool>
+    </property>
+    <addaction name="createFile"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="createFile">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Создать полотно</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
