@@ -15,6 +15,8 @@ find_package(Qt${QT_VERSION_MAJOR}
 )
 qt_standard_project_setup()
 
+set(CMAKE_AUTORCC ON)
+
 set(PROJECT_SOURCES
     main.cpp
     Cirrus.ui
@@ -24,7 +26,9 @@ set(PROJECT_SOURCES
     paintscene.cpp
 )
 
-qt_add_executable(Cirrus ${PROJECT_SOURCES})
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/src.qrc")
+
+qt_add_executable(Cirrus ${PROJECT_SOURCES} ${app_icon_resource_windows})
 
 set_target_properties(Cirrus
     PROPERTIES

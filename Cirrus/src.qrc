@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/ico">
+        <file>img/icon.png</file>
+        <file>img/createFile.png</file>
+        <file>img/histBackward.png</file>
+        <file>img/histForward.png</file>
+        <file>img/openFile.png</file>
+        <file>img/saveFile.png</file>
+    </qresource>
+    <qresource prefix="/tools">
+        <file>img/paintBrush.png</file>
+        <file>img/pencil.png</file>
+        <file>img/dropper.png</file>
+        <file>img/eraser.png</file>
+        <file>img/pen.png</file>
+    </qresource>
+</RCC>
