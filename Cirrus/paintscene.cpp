@@ -1,78 +1,120 @@
+// paintscene.cpp
 #include "paintscene.h"
+#include "drawaction.h"
 
-paintScene::paintScene(QObject *parent) : QGraphicsScene(parent)
-{
-    paintScene::brushWidth = 1;
-    paintScene::instrument = 1;
+paintScene::paintScene(QObject* parent)
+    : QGraphicsScene(parent), brushWidth(1), instrument(1), red(0), green(0), blue(0) {}
+
+paintScene::~paintScene() {
+    while (!undoStack.empty()) {
+        delete undoStack.top();
+        undoStack.pop();
+    }
+    while (!redoStack.empty()) {
+        delete redoStack.top();
+        redoStack.pop();
+    }
 }
 
-paintScene::~paintScene()
-{
+void paintScene::drawItem(QGraphicsItem* item) {
+    DrawAction* action = new DrawAction(item, this);
+    action->execute();
+    undoStack.push(action);
 
+    // Очистка стека redo
+    while (!redoStack.empty()) {
+        delete redoStack.top();
+        redoStack.pop();
+    }
 }
 
-void paintScene::mousePressEvent(QGraphicsSceneMouseEvent* event)
-{
-    switch (paintScene::instrument)
-    {
+void paintScene::undo() {
+    if (!undoStack.empty()) {
+        Action* action = undoStack.top();
+        action->undo();
+        redoStack.push(action);
+        undoStack.pop();
+    }
+}
+
+void paintScene::redo() {
+    if (!redoStack.empty()) {
+        Action* action = redoStack.top();
+        action->redo();
+        undoStack.push(action);
+        redoStack.pop();
+    }
+}
+
+void paintScene::mousePressEvent(QGraphicsSceneMouseEvent* event) {
+    QGraphicsItem* newItem = nullptr;
+
+    switch (instrument) {
     case 1:
-        addEllipse(event->scenePos().x() - 0.5,
+        newItem = addEllipse(event->scenePos().x() - 0.5,
             event->scenePos().y() - 0.5,
-            1,
-            1,
+            1, 1,
             QPen(Qt::NoPen),
             QBrush(Qt::gray));
         break;
     case 2:
-        addEllipse(event->scenePos().x() - paintScene::brushWidth/2,
-            event->scenePos().y() - paintScene::brushWidth / 2,
-            paintScene::brushWidth,
-            paintScene::brushWidth,
+        newItem = addEllipse(event->scenePos().x() - brushWidth / 2,
+            event->scenePos().y() - brushWidth / 2,
+            brushWidth, brushWidth,
             QPen(Qt::NoPen),
-            QBrush(Qt::black));
+            QBrush(QColor(red, green, blue, 255)));
         break;
     case 3:
-        addEllipse(event->scenePos().x() - paintScene::brushWidth / 2,
-            event->scenePos().y() - paintScene::brushWidth / 2,
-            paintScene::brushWidth,
-            paintScene::brushWidth,
+        newItem = addEllipse(event->scenePos().x() - brushWidth / 2,
+            event->scenePos().y() - brushWidth / 2,
+            brushWidth, brushWidth,
             QPen(Qt::NoPen),
-            QBrush(Qt::white));
+            QBrush(Qt::black));
+        addEllipse(event->scenePos().x() - brushWidth / 2,
+            event->scenePos().y() - brushWidth / 2,
+            brushWidth, brushWidth,
+            QPen(Qt::NoPen),
+            QBrush(Qt::lightGray, Qt::Dense2Pattern));
         break;
     default:
         break;
     }
-    
+
+    if (newItem) {
+        drawItem(newItem);
+    }
+
     previousPoint = event->scenePos();
 }
 
-void paintScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
-{
-    switch (paintScene::instrument)
-    {
+void paintScene::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
+    QGraphicsItem* newItem = nullptr;
+
+    switch (instrument) {
     case 1:
-        addLine(previousPoint.x(),
-            previousPoint.y(),
-            event->scenePos().x(),
-            event->scenePos().y(),
+        newItem = addLine(previousPoint.x(), previousPoint.y(),
+            event->scenePos().x(), event->scenePos().y(),
             QPen(Qt::gray, 1, Qt::SolidLine, Qt::RoundCap));
         break;
     case 2:
-        addLine(previousPoint.x(),
-            previousPoint.y(),
-            event->scenePos().x(),
-            event->scenePos().y(),
-            QPen(Qt::black, paintScene::brushWidth, Qt::SolidLine, Qt::RoundCap));
+        newItem = addLine(previousPoint.x(), previousPoint.y(),
+            event->scenePos().x(), event->scenePos().y(),
+            QPen(QColor(red, green, blue, 255), brushWidth, Qt::SolidLine, Qt::RoundCap));
         break;
     case 3:
-        addLine(previousPoint.x(),
-            previousPoint.y(),
-            event->scenePos().x(),
-            event->scenePos().y(),
-            QPen(Qt::white, paintScene::brushWidth, Qt::SolidLine, Qt::RoundCap));
+        newItem = addLine(previousPoint.x(), previousPoint.y(),
+            event->scenePos().x(), event->scenePos().y(),
+            QPen(QBrush(Qt::black), brushWidth, Qt::SolidLine, Qt::RoundCap));
+        addLine(previousPoint.x(), previousPoint.y(),
+            event->scenePos().x(), event->scenePos().y(),
+            QPen(QBrush(Qt::lightGray, Qt::Dense2Pattern), brushWidth, Qt::SolidLine, Qt::RoundCap));
         break;
     default:
         break;
+    }
+
+    if (newItem) {
+        drawItem(newItem);
     }
 
     previousPoint = event->scenePos();

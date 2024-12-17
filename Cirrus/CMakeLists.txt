@@ -24,6 +24,9 @@ set(PROJECT_SOURCES
     Cirrus.cpp
     paintscene.h
     paintscene.cpp
+    actionmanager.h
+    drawaction.h
+    action.h
 )
 
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/src.qrc")

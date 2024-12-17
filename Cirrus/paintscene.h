@@ -1,23 +1,34 @@
-#pragma once
+#ifndef PAINTSCENE_H
+#define PAINTSCENE_H
 
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-#include <QTimer>
-#include <QDebug>
+#include <stack>
+#include "action.h"
 
+class paintScene : public QGraphicsScene {
+    Q_OBJECT
 
-class paintScene  : public QGraphicsScene
-{
-	Q_OBJECT
 public:
-	paintScene(QObject *parent = nullptr);
-	~paintScene();
-	int brushWidth;
-	int instrument;
+    explicit paintScene(QObject* parent = nullptr);
+    ~paintScene();
+
+    void drawItem(QGraphicsItem* item);
+    void undo();
+    void redo();
+    int brushWidth;
+    int instrument;
+    int red, green, blue;
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
+
 private:
-	QPointF previousPoint;
-	QPainter* painter;
-private:
-	void mousePressEvent(QGraphicsSceneMouseEvent* event);
-	void mouseMoveEvent(QGraphicsSceneMouseEvent* event);
+    std::stack<Action*> undoStack;
+    std::stack<Action*> redoStack;
+    QPointF previousPoint;
 };
+
+#endif // PAINTSCENE_H

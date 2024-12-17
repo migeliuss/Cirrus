@@ -15,7 +15,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1024</width>
+    <width>900</width>
     <height>720</height>
    </size>
   </property>
@@ -54,6 +54,12 @@
    <enum>QTabWidget::TabShape::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="maximumSize">
+    <size>
+     <width>890</width>
+     <height>16777215</height>
+    </size>
+   </property>
    <property name="cursor">
     <cursorShape>ArrowCursor</cursorShape>
    </property>
@@ -63,7 +69,7 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>10</x>
       <y>10</y>
       <width>871</width>
       <height>611</height>
@@ -82,133 +88,19 @@
      <bool>true</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(255, 255, 255);
-background-color: rgb(54, 54, 54);</string>
+     <string notr="true">border-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Plain</enum>
     </property>
     <property name="dragMode">
      <enum>QGraphicsView::DragMode::NoDrag</enum>
     </property>
     <property name="resizeAnchor">
-     <enum>QGraphicsView::ViewportAnchor::AnchorViewCenter</enum>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>101</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>101</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>101</width>
-      <height>16777215</height>
-     </size>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LayoutDirection::LeftToRight</enum>
-    </property>
-    <property name="title">
-     <string>Инструменты</string>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <widget class="QRadioButton" name="brush">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="src.qrc">
-           <normaloff>:/tools/img/paintBrush.png</normaloff>:/tools/img/paintBrush.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QRadioButton" name="pen">
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="src.qrc">
-           <normaloff>:/tools/img/pencil.png</normaloff>:/tools/img/pencil.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QRadioButton" name="eraser">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="src.qrc">
-           <normaloff>:/tools/img/eraser.png</normaloff>:/tools/img/eraser.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>32</width>
-           <height>32</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QSlider" name="verticalSlider">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>380</y>
-      <width>131</width>
-      <height>241</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="value">
-     <number>0</number>
-    </property>
-    <property name="sliderPosition">
-     <number>0</number>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Orientation::Vertical</enum>
-    </property>
-    <property name="tickPosition">
-     <enum>QSlider::TickPosition::NoTicks</enum>
+     <enum>QGraphicsView::ViewportAnchor::NoAnchor</enum>
     </property>
    </widget>
   </widget>
@@ -259,8 +151,8 @@ background-color: rgb(54, 54, 54);</string>
      <string>Правка</string>
     </property>
     <addaction name="separator"/>
-    <addaction name="redo"/>
-    <addaction name="undo"/>
+    <addaction name="actionundo"/>
+    <addaction name="actionredo"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menu"/>
@@ -302,8 +194,266 @@ background-color: rgb(54, 54, 54);</string>
    <addaction name="separator"/>
    <addaction name="separator"/>
    <addaction name="separator"/>
-   <addaction name="undo"/>
-   <addaction name="redo"/>
+   <addaction name="actionundo"/>
+   <addaction name="actionredo"/>
+  </widget>
+  <widget class="QDockWidget" name="instruments">
+   <property name="minimumSize">
+    <size>
+     <width>120</width>
+     <height>629</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>629</height>
+    </size>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LayoutDirection::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="floating">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::DockWidgetArea::LeftDockWidgetArea|Qt::DockWidgetArea::RightDockWidgetArea</set>
+   </property>
+   <property name="windowTitle">
+    <string/>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>101</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>101</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>101</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LayoutDirection::LeftToRight</enum>
+     </property>
+     <property name="title">
+      <string>Инструменты</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="0">
+         <widget class="QRadioButton" name="brush">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="src.qrc">
+            <normaloff>:/tools/img/paintBrush.png</normaloff>:/tools/img/paintBrush.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="pen">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="src.qrc">
+            <normaloff>:/tools/img/pencil.png</normaloff>:/tools/img/pencil.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QRadioButton" name="eraser">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="src.qrc">
+            <normaloff>:/tools/img/eraser.png</normaloff>:/tools/img/eraser.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>32</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QSlider" name="verticalSlider">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>400</y>
+       <width>85</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="sliderPosition">
+      <number>0</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TickPosition::NoTicks</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>370</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>  Brush Size</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::TextFormat::AutoText</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>200</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>R G B</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>91</width>
+       <height>68</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QSlider" name="red">
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="green">
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="blue">
+        <property name="maximum">
+         <number>255</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QGraphicsView" name="brushRGB">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>CrossCursor</cursorShape>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::Box</enum>
+     </property>
+     <property name="lineWidth">
+      <number>1</number>
+     </property>
+     <property name="midLineWidth">
+      <number>3</number>
+     </property>
+     <property name="backgroundBrush">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
+       </color>
+      </brush>
+     </property>
+     <property name="renderHints">
+      <set>QPainter::RenderHint::TextAntialiasing</set>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <action name="createFile">
    <property name="checkable">
@@ -341,24 +491,31 @@ background-color: rgb(54, 54, 54);</string>
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="redo">
-   <property name="icon">
-    <iconset resource="src.qrc">
-     <normaloff>:/ico/img/histForward.png</normaloff>:/ico/img/histForward.png</iconset>
-   </property>
-   <property name="text">
-    <string>Вперед</string>
-   </property>
-  </action>
-  <action name="undo">
+  <action name="actionundo">
    <property name="icon">
     <iconset resource="src.qrc">
      <normaloff>:/ico/img/histBackward.png</normaloff>:/ico/img/histBackward.png</iconset>
    </property>
    <property name="text">
-    <string>Назад</string>
+    <string>undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
    </property>
   </action>
+  <action name="actionredo">
+   <property name="icon">
+    <iconset resource="src.qrc">
+     <normaloff>:/ico/img/histForward.png</normaloff>:/ico/img/histForward.png</iconset>
+   </property>
+   <property name="text">
+    <string>redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <zorder>instruments</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
